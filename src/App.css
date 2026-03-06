@@ -1,0 +1,494 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root{
+
+--bg-void:#020408;
+--bg-surface:#091520;
+--bg-elevated:#0d1f2d;
+
+--text-primary:#cce8f0;
+--text-secondary:#6a9aaa;
+
+--state-default:#1A3A4A;
+--state-active:#00D4FF;
+--state-compare:#FF0099;
+--state-sorted:#00FF88;
+--state-pivot:#FFAA00;
+--state-swap:#FF2244;
+
+}
+
+/* ========================= */
+/* BACKGROUND */
+/* ========================= */
+
+body{
+
+margin:0;
+
+background:linear-gradient(180deg,#020408,#0d1f2d);
+
+color:var(--text-primary);
+
+font-family:'JetBrains Mono', monospace;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+padding-top:40px;
+
+overflow-x:hidden;
+
+}
+
+/* ========================= */
+/* CYBER GRID */
+/* ========================= */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
+
+background-size:40px 40px;
+
+z-index:-2;
+
+animation:gridMove 25s linear infinite;
+
+}
+
+@keyframes gridMove{
+
+0%{ transform:translateY(0px); }
+100%{ transform:translateY(40px); }
+
+}
+
+/* ========================= */
+/* APP LAYOUT */
+/* ========================= */
+
+.app{
+
+width:1200px;
+
+max-width:95vw;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+h1{
+
+font-family:'Orbitron',sans-serif;
+
+letter-spacing:6px;
+
+color:#00d4ff;
+
+text-shadow:0 0 20px #00d4ff;
+
+}
+
+p{
+
+color:var(--text-secondary);
+
+letter-spacing:3px;
+
+font-size:12px;
+
+}
+
+/* ========================= */
+/* CONTROLS */
+/* ========================= */
+
+.controls{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+}
+
+button{
+
+background:transparent;
+
+border:1px solid #00d4ff;
+
+color:#00d4ff;
+
+font-family:'Orbitron';
+
+letter-spacing:2px;
+
+padding:10px 18px;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+button:hover{
+
+background:rgba(0,212,255,.1);
+
+box-shadow:0 0 12px #00d4ff;
+
+}
+
+select{
+
+background:var(--bg-surface);
+
+color:white;
+
+border:1px solid #1a3a4a;
+
+padding:8px;
+
+}
+
+label{
+
+font-size:11px;
+
+letter-spacing:2px;
+
+color:var(--text-secondary);
+
+}
+
+/* ========================= */
+/* SLIDERS */
+/* ========================= */
+
+input[type=range]{
+
+appearance:none;
+
+height:2px;
+
+background:#00d4ff;
+
+}
+
+input[type=range]::-webkit-slider-thumb{
+
+appearance:none;
+
+width:14px;
+
+height:14px;
+
+border-radius:50%;
+
+background:#020408;
+
+border:2px solid #00d4ff;
+
+box-shadow:0 0 10px #00d4ff;
+
+}
+
+/* ========================= */
+/* STATS */
+/* ========================= */
+
+.stats{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+margin-top:20px;
+
+}
+
+.card{
+
+background:#091520;
+
+padding:15px 25px;
+
+border:1px solid rgba(0,212,255,.15);
+
+text-align:center;
+
+}
+
+.card span{
+
+font-size:12px;
+
+letter-spacing:2px;
+
+color:#6a9aaa;
+
+}
+
+.card h2{
+
+margin:5px 0;
+
+color:#00d4ff;
+
+text-shadow:0 0 10px #00d4ff;
+
+}
+
+/* ========================= */
+/* ALGORITHM HEADER */
+/* ========================= */
+
+.algoHeader{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:15px;
+
+margin-top:10px;
+
+}
+
+.algoBadge{
+
+padding:4px 10px;
+
+border:1px solid var(--state-active);
+
+font-size:12px;
+
+color:var(--state-active);
+
+font-family:'Orbitron';
+
+letter-spacing:1px;
+
+box-shadow:0 0 8px #00d4ff;
+
+}
+
+/* ========================= */
+/* VISUALIZER */
+/* ========================= */
+
+.visualizer{
+
+width:100%;
+
+height:320px;
+
+display:flex;
+
+align-items:flex-end;
+
+justify-content:center;
+
+gap:4px;
+
+background:var(--bg-surface);
+
+padding:12px;
+
+margin-top:20px;
+
+position:relative;
+
+border:1px solid rgba(0,212,255,0.25);
+
+box-shadow:
+0 0 25px rgba(0,212,255,0.3),
+inset 0 0 35px rgba(0,212,255,0.05);
+
+}
+
+/* holographic screen label */
+
+.visualizer::after{
+
+content:"SORTING VISUALIZER";
+
+position:absolute;
+
+top:6px;
+left:12px;
+
+font-size:10px;
+
+letter-spacing:3px;
+
+color:rgba(0,212,255,0.5);
+
+font-family:'Orbitron';
+
+}
+
+/* ========================= */
+/* BARS */
+/* ========================= */
+
+.bar{
+
+width:8px;
+
+border-radius:2px 2px 0 0;
+
+transition:.25s;
+
+position:relative;
+
+}
+
+/* holographic glow behind bars */
+
+.bar::after{
+
+content:"";
+
+position:absolute;
+
+bottom:0;
+
+left:-2px;
+
+width:12px;
+
+height:100%;
+
+background:radial-gradient(circle,rgba(0,212,255,0.25),transparent 70%);
+
+opacity:.3;
+
+filter:blur(6px);
+
+pointer-events:none;
+
+}
+
+/* Default */
+
+.bar.default{
+background:linear-gradient(to top,#1a3a4a,#2a5a75);
+}
+
+/* Active */
+
+.bar.active{
+background:linear-gradient(to top,#00aacc,#00eeff);
+box-shadow:0 0 14px rgba(0,212,255,.7);
+}
+
+/* Compare */
+
+.bar.compare{
+background:linear-gradient(to top,#cc0077,#ff33bb);
+box-shadow:0 0 14px rgba(255,0,153,.7);
+}
+
+/* Sorted */
+
+.bar.sorted{
+background:linear-gradient(to top,#00bb66,#55ffaa);
+box-shadow:0 0 12px rgba(0,255,136,.6);
+animation:sortedWave .8s ease;
+}
+
+/* Pivot */
+
+.bar.pivot{
+background:linear-gradient(to top,#cc8800,#ffcc44);
+box-shadow:0 0 12px rgba(255,170,0,.6);
+}
+
+/* Swap */
+
+.bar.swap{
+background:linear-gradient(to top,#cc1133,#ff5566);
+box-shadow:0 0 12px rgba(255,34,68,.6);
+}
+
+/* ========================= */
+/* SORT WAVE */
+/* ========================= */
+
+@keyframes sortedWave{
+
+0%{
+box-shadow:0 0 5px #00ff88;
+transform:scaleY(1);
+}
+
+50%{
+box-shadow:0 0 20px #00ff88;
+transform:scaleY(1.05);
+}
+
+100%{
+box-shadow:0 0 5px #00ff88;
+transform:scaleY(1);
+}
+
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer{
+
+margin-top:15px;
+
+font-size:11px;
+
+letter-spacing:2px;
+
+color:#6a9aaa;
+
+text-align:center;
+
+}
+
+.footer span{
+
+color:#00d4ff;
+
+}
